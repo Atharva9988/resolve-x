@@ -7,3 +7,5 @@ class OrganizationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Organization, OrganizationAdmin)
+
+print ("Django is Excellent")
