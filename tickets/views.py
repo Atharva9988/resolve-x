@@ -3,8 +3,10 @@ from rest_framework.response import Response
 from tickets.models import Ticket
 from tickets.serializers import TicketSerializer
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 class TicketListView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         tickets = Ticket.objects.all()
         serializer = TicketSerializer(tickets, many=True)
