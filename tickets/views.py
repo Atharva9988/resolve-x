@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 class TicketListView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        tickets = request.user.organizations.all()
+        tickets = Ticket.objects.filter(created_by=request.user.organizations)
         serializer = TicketSerializer(tickets, many=True)
         return Response(serializer.data)
     def post(self, request):
