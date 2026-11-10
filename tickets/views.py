@@ -8,12 +8,12 @@ from rest_framework.permissions import IsAuthenticated
 class TicketListView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        tickets = Ticket.objects.filter(created_by=request.user.organizations)
+        tickets = Ticket.objects.filter(organization=request.user.organization)
         serializer = TicketSerializer(tickets, many=True)
         return Response(serializer.data)
     def post(self, request):
         serializer = TicketSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(created_by=request.user, organization=request.user.organizations.first())
+            serializer.save(created_by=request.user, organization=request.user.organization)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({"error": "User is not associated with any organization"}, status=status.HTTP_400_BAD_REQUEST)
