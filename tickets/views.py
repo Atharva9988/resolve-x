@@ -16,4 +16,4 @@ class TicketListView(APIView):
         if serializer.is_valid():
             serializer.save(created_by=request.user, organization=request.user.organizations.first())
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "User is not associated with any organization"}, status=status.HTTP_400_BAD_REQUEST)
