@@ -11,4 +11,3 @@ urlpatterns = [
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include('tickets.urls')),
 ]
-
