@@ -8,3 +8,4 @@ class TicketAdmin(admin.ModelAdmin):
     list_select_related = ('organization', 'assigned_to')
 
 admin.site.register(Ticket, TicketAdmin)
+
